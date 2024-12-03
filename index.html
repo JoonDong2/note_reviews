@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>오답노트 리뷰 모음</title>
+    <style>
+      html {
+        height: 100vh;
+      }
+      body {
+        padding: 0;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: black;
+      }
+      .menu {
+        display: flex;
+        flex-direction: row;
+      }
+      .menu-item {
+        flex: 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        cursor: pointer;
+        background-color: #eeeeee;
+      }
+      #index {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        background-color: #eeeeee;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+      }
+      .menu-item:hover {
+        background-color: #dddddd;
+      }
+      #contents {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 50px);
+      }
+      .img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        align-self: center;
+      }
+    </style>
+    <script>
+      const max = 7;
+      let i = 1;
+      function refresh() {
+        const contents = document.getElementById("contents");
+        const newImage = document.createElement("img");
+        newImage.src = `./${i}.png`;
+        newImage.className = "img";
+        contents.replaceChildren(newImage);
+        const index = document.getElementById("index");
+        index.replaceChildren(`${i}/${max}`);
+      }
+      function prev() {
+        i -= 1;
+        if (i === 0) {
+          i = max;
+        }
+        refresh();
+      }
+      function next() {
+        i += 1;
+        if (i > max) {
+          i = 1;
+        }
+        refresh();
+      }
+    </script>
+  </head>
+  <body onload="refresh()">
+    <div class="menu">
+      <div class="menu-item" onclick="prev()">이전</div>
+      <div id="index"></div>
+      <div class="menu-item" onclick="next()">다음</div>
+    </div>
+    <div id="contents"></div>
+  </body>
+</html>
